@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>Happy Birthday Asmaa 👑</title>
+<!-- الروابط والستايل كما هي في كودك الأصلي -->
+<style>
+    /* ... (نفس الـ CSS الخاص بك) ... */
+    /* إضافة بسيطة لضمان عمل الهروب بشكل جيد */
+    #btnNo { transition: all 0.2s ease; }
+</style>
+</head>
+<body>
+
+<!-- ══ صفحة كلمة السر ══ -->
+<div id="lock">
+  <div class="lWrap">
+    <div class="lCard">
+      <div class="title-container">
+        <span class="lCrown">👑</span>
+        <h1 class="lMainTitle">Princess Asmaa</h1>
+      </div>
+      <p class="lSub">هذه الصفحة محمية بحب لا نهاية له 💖</p>
+      <div class="lField">
+        <input type="password" id="li" placeholder="أدخلي كلمة السر الملكية..." autocomplete="off"/>
+      </div>
+      <button class="lSubmit" onclick="chkLock()">✦ دخول لعالمكِ ✦</button>
+      <p class="lErr" id="le"></p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ لعبة الأسئلة ══ -->
+<div id="love-quiz-zone">
+  <div class="quiz-card">
+    <h2 class="quiz-question" id="quizQuestion">بتحبيني ولا لع؟ 🤔</h2>
+    <div class="quiz-btn-container" id="quizBtnContainer">
+      <button class="quiz-btn btn-yes" id="btnYes" onclick="handleQuizYes()">ايوه 😍</button>
+      <!-- تم التعديل هنا: زر "لع" يستدعي فقط دالة الهروب -->
+      <button class="quiz-btn btn-no" id="btnNo" onmouseover="escapeBtn()" onclick="escapeBtn()">لع 😢</button>
+    </div>
+  </div>
+</div>
+
+<!-- (باقي العناصر كما هي في كودك) -->
+<!-- ... -->
+
+<script>
+const PASSWORD_MAIN = "asmaa";
+const PASSWORD_SECRET = "01272499510";
+let currentStep = 1;
+
+function chkLock(){
+  const inp = document.getElementById('li').value;
+  if(inp.toLowerCase() === PASSWORD_MAIN.toLowerCase()){
+    document.getElementById('lock').classList.add('gone');
+    document.getElementById('love-quiz-zone').classList.add('show');
+  } else {
+    document.getElementById('le').innerText = "كلمة السر غير صحيحة.. حاولي مجدداً 💖";
+  }
+}
+
+function handleQuizYes(){
+  if(currentStep === 1){
+    currentStep = 2;
+    document.getElementById('quizQuestion').innerText = "بتحبيه بس ولا قوي؟ 😏";
+    document.getElementById('btnYes').innerText = "بحبه قوي 🥰";
+    document.getElementById('btnNo').innerText = "بحبه بس 😕";
+  } else if(currentStep === 2){
+    currentStep = 3;
+    document.getElementById('quizQuestion').innerText = "بتحبيه قوي ولا قوي قوي؟ 🫣💖";
+    document.getElementById('btnYes').innerText = "قوي قوي 🔥❤️";
+    document.getElementById('btnNo').innerText = "بحبه قوي 🥺";
+  } else if(currentStep === 3){
+    document.getElementById('love-quiz-zone').classList.remove('show');
+    triggerKissScene();
+  }
+}
+
+// دالة الهروب المعدلة لتعمل كـ "زر طائر" فقط
+function escapeBtn() {
+    const btnNo = document.getElementById('btnNo');
+    btnNo.style.position = "fixed";
+    
+    // حساب مساحة التحرك
+    const maxX = window.innerWidth - btnNo.offsetWidth - 20;
+    const maxY = window.innerHeight - btnNo.offsetHeight - 20;
+    
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+    
+    btnNo.style.left = x + 'px';
+    btnNo.style.top = y + 'px';
+}
+
+// (باقي الدوال الخاصة بك مثل triggerKissScene و startCinema وغيرها...)
+</script>
+</body>
+</html>
